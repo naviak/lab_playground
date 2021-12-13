@@ -19,9 +19,17 @@ if __name__ == '__main__':
 
     stabilizedPump = Stabilizer(pump)
     angles, u_alpha = stabilizedPump.approxU()
+    _, wt = stabilizedPump.stableW(12, 10 * t, 0.001)
+
+    time, mass = stabilizedPump.get_mass()
+
+    plt.plot(time, mass)
+    plt.plot(time_axis, mass_axis)
+
     fig, ax = plt.subplots()
-    plt.plot(angles, u_alpha, label="Экспериментальная функция геометрии")
-    plt.plot(exp_angles, u_exp, label="Восстановленная функция геометрии")
+    #plt.plot(angles, u_alpha, label="Экспериментальная функция геометрии")
+    #plt.plot(exp_angles, u_exp, label="Восстановленная функция геометрии")
+    plt.plot(*df(time, mass))
     ax.legend()
     fig.set_figheight(5)
     fig.set_figwidth(8)
